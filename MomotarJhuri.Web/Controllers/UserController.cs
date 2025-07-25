@@ -98,19 +98,14 @@ namespace MomotarJhuri.Web.Controllers
 
 
         [HttpGet]
-        [Authorize] // Ensure only logged-in users can access
+        [Authorize]
         public async Task<IActionResult> Profile()
         {
-            // Get the current user
             var user = await _userManager.GetUserAsync(User);
-            //user = null;
-
             if (user == null)
             {
-                return Challenge(); // Will redirect to login if user not found
+                return Challenge();
             }
-
-            // Map to a view model
             var model = new ProfileVM
             {
                 UserName = user.UserName,
